@@ -1,1 +1,19 @@
-{}
+{
+  "tasks": [
+    {
+      "taskName": "Добавить задачу №3",
+      "completed": false,
+      "id": "f844"
+    },
+    {
+      "taskName": "Выполненная задача №1",
+      "completed": true,
+      "id": "9b49"
+    },
+    {
+      "taskName": "Выполненная задача №2",
+      "completed": true,
+      "id": "7e8a"
+    }
+  ]
+}
