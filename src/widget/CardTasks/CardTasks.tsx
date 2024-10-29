@@ -1,3 +1,4 @@
+import NoData from '../../shared/NoData/ui/NoData'
 import { ITask } from '../../shared/Task/model/ITask'
 import Task from '../../shared/Task/ui/Task'
 
@@ -7,20 +8,34 @@ interface CardTasksProps {
 }
 
 const CardTasks = ({ mode, todos }: CardTasksProps) => {
+  const reversedTodos = [...todos].reverse()
   return (
     <>
       {mode === 'all' && (
         <>
-          {todos.map((task) => (
+          {reversedTodos.map((task) => (
             <Task key={task.id} task={task} />
           ))}
+          {reversedTodos.length === 0 && <NoData />}
         </>
       )}
       {mode === 'active' && (
-        <>{todos.map((task) => !task.completed && <Task key={task.id} task={task} />)}</>
+        <>
+          {reversedTodos.some((task) => !task.completed) ? (
+            reversedTodos.map((task) => !task.completed && <Task key={task.id} task={task} />)
+          ) : (
+            <NoData />
+          )}
+        </>
       )}
       {mode === 'completed' && (
-        <>{todos.map((task) => task.completed && <Task key={task.id} task={task} />)}</>
+        <>
+          {reversedTodos.some((task) => task.completed) ? (
+            reversedTodos.map((task) => task.completed && <Task key={task.id} task={task} />)
+          ) : (
+            <NoData />
+          )}
+        </>
       )}
     </>
   )

@@ -20,7 +20,7 @@ const TaskApi = TodoService.injectEndpoints({
       },
       invalidatesTags: ['Tasks'],
     }),
-    addTask: build.mutation<void, { taskName: string; completed: boolean }>({
+    createTask: build.mutation<void, { taskName: string; completed: boolean }>({
       query: (body) => ({
         url: '/tasks',
         method: 'POST',
@@ -28,7 +28,7 @@ const TaskApi = TodoService.injectEndpoints({
       }),
       invalidatesTags: ['Tasks'],
     }),
-    deleteTask: build.mutation<void, number>({
+    deleteTask: build.mutation<void, string>({
       query: (id) => ({
         url: `/tasks/${id}`,
         method: 'DELETE',
@@ -40,8 +40,7 @@ const TaskApi = TodoService.injectEndpoints({
 
 export const {
   useGetTasksQuery,
-  //   useGetTaskDetailsQuery,
   useUpdateTaskMutation,
-  useAddTaskMutation,
+  useCreateTaskMutation,
   useDeleteTaskMutation,
 } = TaskApi

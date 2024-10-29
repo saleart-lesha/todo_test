@@ -1,7 +1,10 @@
-import { Card, Checkbox, Flex, Modal, Text } from '@mantine/core'
+import { Card, Checkbox, Flex, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { useState } from 'react'
+
+import TaskAction from '../../TaskAction/ui/TaskAction'
+import { useUpdateTaskMutation } from '../api/TaskApi'
 import { ITask } from '../model/ITask'
+import classes from './Task.module.css'
 
 interface TaskProps {
   task: ITask
@@ -9,21 +12,18 @@ interface TaskProps {
 
 const Task = ({ task }: TaskProps) => {
   const [opened, { open, close }] = useDisclosure(false)
-  const [checked, setChecked] = useState(task.completed)
+  const [updateTask] = useUpdateTaskMutation()
   return (
     <>
-      <Modal opened={opened} onClose={close} withCloseButton={false}>
-        <Text>{task.taskName}</Text>
-      </Modal>
+      <TaskAction task={task} opened={opened} close={close} action='update' />
       <Card.Section withBorder inheritPadding py='xs'>
-        <Flex align='center' gap='sm'>
-          <Checkbox checked={checked} onChange={(e) => setChecked(e.currentTarget.checked)} />
-          <Text
-            truncate='end'
-            td={task.completed ? 'line-through' : undefined}
-            onClick={open}
-            style={{ cursor: 'pointer' }}
-          >
+        <Flex align='center' gap='sm' onClick={open} className={classes.form}>
+          <Checkbox
+            checked={task.completed}
+            onClick={(e) => e.stopPropagation()}
+            onChange={() => updateTask({ ...task, completed: !task.completed })}
+          />
+          <Text truncate='end' td={task.completed ? 'line-through' : undefined}>
             {task.taskName}
           </Text>
         </Flex>
