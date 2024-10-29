@@ -39,42 +39,43 @@ const TaskAction = ({ task, opened, close, action }: TaskActionProps) => {
     close()
   }, [isSuccessDelete, isSuccessUpdate, isSuccessCreate])
 
+  const handlerUpdateTask = () => {
+    if (!form.validate().hasErrors && task) {
+      updateTask({
+        id: task.id,
+        taskName: form.values.name,
+        completed: task.completed,
+      })
+    }
+  }
+
+  const handlerCreateTask = () => {
+    if (!form.validate().hasErrors) {
+      createTask({ taskName: form.values.name, completed: false })
+    }
+  }
+
+  const handlerDeleteTask = () => {
+    if (task) {
+      deleteTask(task.id)
+    }
+  }
+
   return (
     <Modal opened={opened} onClose={close} withCloseButton={false}>
       <Flex direction='column' gap='sm'>
         <TextInput label='Задача' placeholder='Добавить задачу' {...form.getInputProps('name')} />
-        {action === 'update' && task && (
+        {action === 'update' && (
           <Flex gap='sm'>
-            <Button
-              fullWidth
-              onClick={() => {
-                if (!form.validate().hasErrors) {
-                  updateTask({
-                    id: task.id,
-                    taskName: form.values.name,
-                    completed: task.completed,
-                  })
-                }
-              }}
-            >
+            <Button fullWidth onClick={handlerUpdateTask}>
               Сохранить
             </Button>
-            <Button fullWidth onClick={() => deleteTask(task.id)} color='red'>
+            <Button fullWidth onClick={handlerDeleteTask} color='red'>
               Удалить
             </Button>
           </Flex>
         )}
-        {action === 'create' && (
-          <Button
-            onClick={() => {
-              if (!form.validate().hasErrors) {
-                createTask({ taskName: form.values.name, completed: false })
-              }
-            }}
-          >
-            Создать
-          </Button>
-        )}
+        {action === 'create' && <Button onClick={handlerCreateTask}>Создать</Button>}
       </Flex>
     </Modal>
   )

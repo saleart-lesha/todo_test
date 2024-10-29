@@ -1,3 +1,19 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "taskName": "Задача 1",
+      "completed": true,
+      "id": "7b8d"
+    },
+    {
+      "id": "fe15",
+      "taskName": "Задача 2",
+      "completed": false
+    },
+    {
+      "id": "c90e",
+      "taskName": "Задача 3",
+      "completed": false
+    }
+  ]
 }

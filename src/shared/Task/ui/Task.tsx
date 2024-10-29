@@ -13,6 +13,10 @@ interface TaskProps {
 const Task = ({ task }: TaskProps) => {
   const [opened, { open, close }] = useDisclosure(false)
   const [updateTask] = useUpdateTaskMutation()
+
+  const handlerUpdateTask = () => {
+    updateTask({ ...task, completed: !task.completed })
+  }
   return (
     <>
       <TaskAction task={task} opened={opened} close={close} action='update' />
@@ -21,7 +25,7 @@ const Task = ({ task }: TaskProps) => {
           <Checkbox
             checked={task.completed}
             onClick={(e) => e.stopPropagation()}
-            onChange={() => updateTask({ ...task, completed: !task.completed })}
+            onChange={handlerUpdateTask}
           />
           <Text truncate='end' td={task.completed ? 'line-through' : undefined}>
             {task.taskName}
