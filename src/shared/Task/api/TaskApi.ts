@@ -1,7 +1,7 @@
 import { TodoService } from '../../../app/services/TodoService'
 import { ITask } from '../model/ITask'
 
-const TaskApi = TodoService.injectEndpoints({
+export const TaskApi = TodoService.injectEndpoints({
   endpoints: (build) => ({
     getTasks: build.query<ITask[], void>({
       query: () => ({
