@@ -14,7 +14,8 @@ describe('TaskAction', () => {
     store.dispatch(TaskApi.util.resetApiState())
   })
   it('Изменение статуса выполнения задачи', async () => {
-    let requestBody = null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let requestBody: any | null = null
     server.use(
       http.put('/tasks/1', async ({ request }) => {
         requestBody = await request.json()

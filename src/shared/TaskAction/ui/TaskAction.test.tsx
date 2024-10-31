@@ -16,7 +16,8 @@ describe('TaskAction', () => {
 
   it('Создание новой задачи', async () => {
     const closeFn = vi.fn()
-    let requestBody = null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let requestBody: any | null = null
 
     server.use(
       http.post('/tasks', async ({ request }) => {
@@ -44,7 +45,8 @@ describe('TaskAction', () => {
   it('Изменение задачи', async () => {
     const closeFn = vi.fn()
 
-    let requestBody = null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let requestBody: any | null = null
     server.use(
       http.put('/tasks/1', async ({ request }) => {
         requestBody = await request.json()
