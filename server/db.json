@@ -12,7 +12,7 @@
     },
     {
       "taskName": "Задача 3",
-      "completed": true,
+      "completed": false,
       "id": "c90e"
     }
   ]
