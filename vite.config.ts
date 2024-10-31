@@ -11,11 +11,11 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: [/\.test\.(ts|tsx)$/, /@testing-library/, /vitest/],
+      external: ['*.test.ts', '*.test.tsx', /@testing-library/, /vitest/],
     },
     outDir: 'dist',
   },
   optimizeDeps: {
-    exclude: ['**/*.test.ts', '**/*.test.tsx'],
+    exclude: ['*.test.ts', '*.test.tsx'],
   },
 })

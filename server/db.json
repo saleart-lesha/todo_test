@@ -6,13 +6,13 @@
       "id": "7b8d"
     },
     {
-      "id": "fe15",
       "taskName": "Задача 2",
-      "completed": false
+      "completed": true,
+      "id": "fe15"
     },
     {
       "taskName": "Задача 3",
-      "completed": false,
+      "completed": true,
       "id": "c90e"
     }
   ]
